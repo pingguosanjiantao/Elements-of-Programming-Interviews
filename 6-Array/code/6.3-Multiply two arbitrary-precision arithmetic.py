@@ -34,15 +34,5 @@ def multiply_array(x, y):
     return ret
 
 
-def canReachEnd(nums):
-    canReachSoFar = 0
-    for i in range(len(nums)):
-        if i <= canReachSoFar:
-            canReachSoFar = max(canReachSoFar, i + nums[i])
-    return True if canReachSoFar >= len(nums) else False
-
-
 print multiply_array_positive([1, 2], [9])
 print multiply_array([-1, 2], [9])
-
-print canReachEnd([3, 3, 1, 1, 2, 0, 1])
