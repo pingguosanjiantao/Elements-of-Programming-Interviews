@@ -4,7 +4,7 @@ import random
 
 def randomSampling(k, nums):
     for i in range(k):
-        idx = i + random.randint(0, len(nums) - i)
+        idx = i + random.randint(0, len(nums) - 1 - i)
         nums[idx], nums[i] = nums[i], nums[idx]
     print nums[:k]
 
