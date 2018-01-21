@@ -12,12 +12,11 @@ def getIntersectionNode(a, b):
             head = head.next
         return head
 
-    def overLappingNoCycleLists(a, b):
-        aLength, bLength = getLength(a), getLength(b)
-        if aLength > bLength:
-            a = advanceByK(a, aLength - bLength)
-        else:
-            b = advanceByK(b, bLength - aLength)
-        while a is not None and b is not None and a != b:
-            a, b = a.next, b.next
-        return a
+    aLength, bLength = getLength(a), getLength(b)
+    if aLength > bLength:
+        a = advanceByK(a, aLength - bLength)
+    else:
+        b = advanceByK(b, bLength - aLength)
+    while a is not None and b is not None and a != b:
+        a, b = a.next, b.next
+    return a
