@@ -71,6 +71,9 @@ def overlappingLists(a, b):
         a = advanceByK(a, aStemLength - bStemLength)
     else:
         b = advanceByK(b, bStemLength - aStemLength)
+    # if a == b before reaching aCycleTail, it means the overlap first
+    # occurs before the cycle starts; otherwise, the first overlapping
+    # node is not unique, so we can return any node on the cycle
     while a != b and a != aCycleTail and b != bCycleTail:
         a, b = a.next, b.next
     return a if a == b else aCycleTail
