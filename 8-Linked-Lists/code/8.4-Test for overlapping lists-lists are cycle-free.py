@@ -1,5 +1,5 @@
 # leetcode 160
-def getIntersectionNode(a, b):
+def overlappingNoCycleLists(a, b):
     def getLength(head):
         cnt = 0
         while head is not None:
