@@ -1,11 +1,8 @@
 # coding:utf-8
+from LinkedListLib import *
+
+
 # leetcode 23
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
 def mergeTwoLists(a, b):
     dummy = ListNode(-1)
     cur = dummy
