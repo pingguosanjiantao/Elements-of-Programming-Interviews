@@ -1,23 +1,23 @@
 # leetcode 160
 def getIntersectionNode(a, b):
-    def findEnd(head):
-        while head is not None and head.next is not None:
+    def getLength(head):
+        cnt = 0
+        while head is not None:
+            head = head.next
+            cnt += 1
+        return cnt
+
+    def advanceByK(head, k):
+        for _ in range(k):
             head = head.next
         return head
 
-    def linkCycle(head):
-        end = findEnd(head)
-        end.next = head
-
-    def deteckCycle(head):
-        fast, slow = head, head
-        while fast is not None and fast.next is not None:
-            fast, slow = fast.next.next, slow
-            if fast is slow:
-                while head is not slow:
-                    head, slow = head.next, slow.next
-                return head
-        return None
-
-    linkCycle(a)
-    return deteckCycle(b)
+    def overLappingNoCycleLists(a, b):
+        aLength, bLength = getLength(a), getLength(b)
+        if aLength > bLength:
+            a = advanceByK(a, aLength - bLength)
+        else:
+            b = advanceByK(b, bLength - aLength)
+        while a is not None and b is not None and a != b:
+            a, b = a.next, b.next
+        return a
