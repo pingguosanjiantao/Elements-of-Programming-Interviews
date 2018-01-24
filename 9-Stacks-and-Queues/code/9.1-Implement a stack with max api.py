@@ -3,7 +3,6 @@ class MinStack(object):
     def __init__(self):
         self.data = []
         self.mins = []
-        self.minValue = float('-inf')
 
     def push(self, x):
         if len(self.data) == 0 or x <= self.mins[-1]:
