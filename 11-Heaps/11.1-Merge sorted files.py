@@ -39,6 +39,8 @@ class MinHeap:
 
         return ret
 
+    def isEmpty(self):
+        return len(self.data) == 0
 
 heap = MinHeap()
 heap.add(5)
