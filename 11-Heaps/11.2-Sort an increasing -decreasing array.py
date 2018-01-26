@@ -1,3 +1,4 @@
+# copied from 11.1
 class MinHeap:
     def __init__(self):
         self.data = []
@@ -42,13 +43,29 @@ class MinHeap:
     def isEmpty(self):
         return len(self.data) == 0
 
-heap = MinHeap()
-heap.add(5)
-heap.add(3)
-heap.add(1)
-heap.add(2)
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
+
+def sortKIncreasingDecreasingArray(nums):
+    isIncreasing = True
+    numLists = []
+    startIdx = 0
+    for i in range(1, len(nums) + 1):
+        if i == len(nums) or (nums[i - 1] < nums[i] and not isIncreasing) or (nums[i - 1] >= nums[i] and isIncreasing):
+            cur = nums[startIdx:i]
+            if not isIncreasing:
+                cur = cur[::-1]
+            numLists += [cur]
+            startIdx = i
+            isIncreasing = not isIncreasing
+    minHeap = MinHeap()
+    ret = []
+    for ele in numLists:
+        for num in ele:
+            minHeap.add(num)
+
+    while not minHeap.isEmpty():
+        ret += [minHeap.poll()]
+
+    return ret
+
+
+print sortKIncreasingDecreasingArray([57, 131, 493, 294, 221, 339, 418, 452, 442, 190])

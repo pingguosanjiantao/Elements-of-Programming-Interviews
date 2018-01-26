@@ -11,7 +11,7 @@ def nonuniformRandomGenerator(nums, p):
     # search zone differs from binary search node,
     # [a, b)
     def binarySearch(nums, left, right, target):
-        if target == right:
+        if target == nums[right]:
             return right - 1
         while left < right:
             mid = (left + right) / 2

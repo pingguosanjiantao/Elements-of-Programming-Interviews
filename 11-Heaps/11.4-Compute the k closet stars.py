@@ -42,13 +42,19 @@ class MinHeap:
     def isEmpty(self):
         return len(self.data) == 0
 
-heap = MinHeap()
-heap.add(5)
-heap.add(3)
-heap.add(1)
-heap.add(2)
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
+    def size(self):
+        return len(self.data)
+
+
+def findMaxNums(k, stars):
+    minHeap = MinHeap()
+    for ele in stars:
+        minHeap.add(ele)
+        if minHeap.size() == (k + 1):
+            minHeap.poll()
+    ret = []
+    while not minHeap.isEmpty():
+        ret += [minHeap.poll()]
+    return ret
+
+print findMaxNums(3, [5,2,8,6,1,4,9,6])

@@ -1,3 +1,4 @@
+# copied from 11.1
 class MinHeap:
     def __init__(self):
         self.data = []
@@ -42,13 +43,23 @@ class MinHeap:
     def isEmpty(self):
         return len(self.data) == 0
 
-heap = MinHeap()
-heap.add(5)
-heap.add(3)
-heap.add(1)
-heap.add(2)
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
-print heap.poll()
+
+# no num in sequence is more than 2 away from its final sorted position
+# so, here we ser k is 3
+def sortApproximatelySortedData(nums, k):
+    minHeap = MinHeap()
+    i = 0
+    while i < len(nums) and i < k:
+        minHeap.add(nums[i])
+        i += 1
+    ret = []
+    while i < len(nums):
+        minHeap.add(nums[i])
+        ret += [minHeap.poll()]
+        i += 1
+    while not minHeap.isEmpty():
+        ret += [minHeap.poll()]
+    return ret
+
+
+print  sortApproximatelySortedData([3, -1, 2, 6, 4, 5, 8], 3)
