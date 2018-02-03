@@ -7,12 +7,16 @@ class TreeNode:
 
 # optimal solution
 def rebuildBST(nums):
-    def doBuildBST(nums, start, end):
-        if start >= end:
-            return None
-        idx = start + 1
-        while idx < end and nums[idx] < nums[start]:
-            idx += 1
-        return TreeNode(nums[start], doBuildBST(nums, start + 1, idx), doBuildBST(nums, idx, end))
+    rootIdx = 0
 
-    return doBuildBST(nums, 0, len(nums))
+    def doBuildBST(nums, lower, upper):
+        global rootIdx
+        if rootIdx == len(nums):
+            return None
+        rootVal = nums[rootIdx]
+        if rootVal < lower or rootVal > upper:
+            return None
+        rootIdx += 1
+        return TreeNode(rootVal, doBuildBST(nums, lower, rootVal), doBuildBST(nums, rootVal, upper))
+
+    return doBuildBST(nums, float('-inf'), float('inf'))
