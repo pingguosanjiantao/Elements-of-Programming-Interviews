@@ -1,27 +1,16 @@
-def nQueens(n):
-    ret = []
-    solveNQueens(n, 0, [], ret)
-    return ret
+# optimal solution
+def queen(A, cur=0):
+    if cur == len(A):
+        print A
+        return
+    for col in range(len(A)):
+        A[cur], flag = col, True
+        for row in range(cur):
+            if A[row] == col or abs(col - A[row]) == cur - row:
+                flag = False
+                break
+        if flag:
+            queen(A, cur + 1)
 
 
-def solveNQueens(n, row, colPlacement, ret):
-    if row == n:
-        ret += [colPlacement[:]]
-    else:
-        for col in range(n):
-            colPlacement += [col]
-            if isValid(colPlacement):
-                solveNQueens(n, row + 1, colPlacement, ret)
-            colPlacement.pop()
-
-
-def isValid(colPlacement):
-    rowID = len(colPlacement) - 1
-    for i in range(rowID):
-        diff = abs(colPlacement[i] - colPlacement[rowID])
-        if diff == 0 or diff == rowID - i:
-            return False
-    return True
-
-
-print nQueens(4)
+queen([None] * 4)
