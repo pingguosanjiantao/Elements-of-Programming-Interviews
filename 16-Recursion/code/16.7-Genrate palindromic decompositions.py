@@ -11,13 +11,13 @@ def palindromePartition(s):
     def doPartition(s, begin, cur, ret):
         if begin == len(s):
             ret += [cur[:]]
-        else:
-            for i in range(begin + 1, len(s) + 1):
-                prefix = s[begin:i]
-                if isPalindrome(prefix):
-                    cur += [prefix]
-                    doPartition(s, i, cur, ret)
-                    cur.pop()
+            return
+        for i in range(begin + 1, len(s) + 1):
+            prefix = s[begin:i]
+            if isPalindrome(prefix):
+                cur += [prefix]
+                doPartition(s, i, cur, ret)
+                cur.pop()
 
     ret = []
     doPartition(s, 0, [], ret)
