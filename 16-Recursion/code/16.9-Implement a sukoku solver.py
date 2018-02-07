@@ -1,28 +1,27 @@
 import math
 
 
-def solveSudoku(partialAssignment):
-    return solvePartialSudoku(0, 0, partialAssignment)
+def solveSudoku(matrix):
+    return doSolveSudoku(0, 0, matrix)
 
 
-def solvePartialSudoku(i, j, partialAssignment):
-    if i == len(partialAssignment):
-        i = 0
-        j += 1
-        if j == len(partialAssignment[i]):
+def doSolveSudoku(i, j, matrix):
+    if i == len(matrix):
+        i, j = 0, j + 1
+        if j == len(matrix[i]):
             return True
-    if len(partialAssignment[i][j]) != 0:
-        return solvePartialSudoku(i + 1, j, partialAssignment)
-    for val in range(1, len(partialAssignment) + 1):
-        if validToAddVal(partialAssignment, i, j, val):
-            partialAssignment[i][j] = val
-            if solvePartialSudoku(i + 1, j, partialAssignment):
+    if len(matrix[i][j]) != 0:
+        return doSolveSudoku(i + 1, j, matrix)
+    for val in range(1, len(matrix) + 1):
+        if isValid(matrix, i, j, val):
+            matrix[i][j] = val
+            if doSolveSudoku(i + 1, j, matrix):
                 return True
-    partialAssignment[i][j] = 0
+    matrix[i][j] = 0
     return False
 
 
-def validToAddVal(matrix, i, j, val):
+def isValid(matrix, i, j, val):
     for row in range(len(matrix)):
         if row[j] == val:
             return False
