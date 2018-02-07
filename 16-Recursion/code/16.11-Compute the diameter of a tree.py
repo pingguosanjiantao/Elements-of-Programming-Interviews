@@ -15,10 +15,10 @@ class HeightAndDiameter:
         self.diameter = diameter
 
 
-def computeHeightAndDiameter(r):
+def computeHeightAndDiameter(root):
     diameter = float('-inf')
     heights = [0.0, 0.0]
-    for e in r.edges:
+    for e in root.edges:
         heightDiameter = computeHeightAndDiameter(e.root)
         if heightDiameter.height + e.height > heights[0]:
             heights[1] = heights[0]
@@ -30,4 +30,4 @@ def computeHeightAndDiameter(r):
 
 
 def computeDiameter(root):
-    return computeDiameter(root).diameter if root is not None else 0.0
+    return computeHeightAndDiameter(root).diameter if root is not None else 0.0
