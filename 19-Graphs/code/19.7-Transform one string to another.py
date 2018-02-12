@@ -1,7 +1,7 @@
+# amazing problem
 def transformString(dictionary, s, t):
-    q = []
     dictionary.remove(s)
-    q.append([s, 0])
+    q = [[s, 0]]
     while len(q) > 0:
         [curStr, dis] = q.pop(0)
         if curStr == t:
