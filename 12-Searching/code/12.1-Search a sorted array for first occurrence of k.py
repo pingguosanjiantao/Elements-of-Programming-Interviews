@@ -1,13 +1,13 @@
 def searchFisrt(nums, key):
-    left, right = 0, len(nums) - 1
+    left, right = 0, len(nums)
     ret = None
-    while left <= right:
+    while left < right:
         mid = (left + right) / 2
         if nums[mid] == key:
             ret = mid
             right -= 1
         elif nums[mid] > key:
-            right = mid - 1
+            right = mid
         else:
             left = mid + 1
     return ret
