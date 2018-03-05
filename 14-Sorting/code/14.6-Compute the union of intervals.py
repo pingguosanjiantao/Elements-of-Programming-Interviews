@@ -7,7 +7,7 @@ def unionOfIntervals(intervals):
     for i in range(1, len(intervals)):
         cur = intervals[i]
         if cur[0] <= pre[1]:
-            pre[1] = cur[1] if cur[1] > pre[1] else cur[0]
+            pre[1] = cur[1] if cur[1] > pre[1] else pre[1]
         else:
             ret += [pre]
             pre = cur
