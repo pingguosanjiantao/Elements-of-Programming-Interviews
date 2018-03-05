@@ -1,11 +1,10 @@
 def searchEntryEqualToItsIndex(nums):
     left, right = 0, len(nums)
     while left < right:
-        mid = (left + right) / 2
-        diff = nums[mid] - mid
-        if diff == 0:
+        mid = left + (right - left) / 2
+        if nums[mid] == mid:
             return mid
-        elif diff > 0:
+        elif nums[mid] > mid:
             right = mid
         else:
             left = mid + 1

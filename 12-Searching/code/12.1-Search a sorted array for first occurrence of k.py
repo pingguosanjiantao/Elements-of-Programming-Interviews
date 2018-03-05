@@ -2,7 +2,7 @@ def searchFisrt(nums, key):
     left, right = 0, len(nums)
     ret = None
     while left < right:
-        mid = (left + right) / 2
+        mid = left + (right - left) / 2
         if nums[mid] == key:
             ret = mid
             right -= 1
