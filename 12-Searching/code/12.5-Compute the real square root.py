@@ -28,5 +28,11 @@ def squareRoot(x):
             left = mid
     return left
 
+# optimal solution
+def sqrt(x):
+    radix = x
+    for _ in range(10):
+        x = (x + radix / x) / 2.0
+    return x
 
 print squareRoot(5)
