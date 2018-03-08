@@ -10,5 +10,13 @@ def generatePrimes(n):
                 isPrime[j] = False
     return primes
 
+def cntPrimes(n):
+    isPrime = [True] * n
+    isPrime[0] = isPrime[1] = False
+    for k in range(2, int(n ** 0.5) + 1):
+        if isPrime[k]:
+            for i in range(k * k, n, k):
+                isPrime[i] = False
+    return sum(isPrime)
 
 print generatePrimes(5)
