@@ -12,11 +12,21 @@ class Solution(object):
         return max(max(buy), max(sell))
 
     def maxProfit_optimzed(self, k, nums):
+        if k < 1:
+            return 0
+        if k > len(nums) / 2:
+            maxNum = 0
+            for i in range(len(nums) - 1):
+                if nums[i] < nums[i + 1]:
+                    maxNum += (nums[i + 1] - nums[i])
+            return maxNum
+
         kSum = [float('-inf')] * (k * 2)
         for i in range(len(nums)):
             for j in range(min(i + 1, len(kSum))):
                 diff = [-1, 1][j % 2] * nums[i] + (0 if j == 0 else kSum[j - 1])
                 kSum[j] = max(diff, kSum[j])
+        print kSum
         return kSum[-1]
 
 
