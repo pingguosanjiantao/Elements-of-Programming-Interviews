@@ -72,6 +72,38 @@ def maxRectangleSubmatrix_2(matrix):
             maxRectangleArea = max(maxRectangleArea, getLargestRectangle(matrixLine))
     return maxRectangleArea
 
+# 寻找最大面积, 不规则
+class UnionFind:
+    def __init__(self, length):
+        self.data = {}
+        for i in range(length):
+            self.data[i] = i
+    def find(self, k):
+        while self.data[k] != k:
+            k = self.data[k]
+        return k
+    def union(self, a, b):
+        aRoot, bRoot = self.find(a), self.find(b)
+        if aRoot != bRoot:
+            self.data[aRoot] = bRoot
+def maxArea(matrix):
+    rows, cols = len(matrix), len(matrix[0])
+    uf = UnionFind(rows * cols)
+    for i in range(rows):
+        for j in range(cols):
+            if matrix[i][j] == 1:
+                # union upper
+                if i - 1 >= 0 and matrix[i - 1][j] == 1:
+                    uf.union(i * rows + j, (i - 1) * rows + j)
+                # union left
+                if j - 1 >= 0 and matrix[i][j - 1] == 1:
+                    uf.union(i * rows + j, i * rows + (j - 1))
+    counter = {}
+    for i in range(rows):
+        for j in range(cols):
+            root = uf.find(i * rows + j)
+            counter[root] = counter.get(root, 0) + 1
+    return max(counter.values())
 
 matrix = [
     [0, 1, 1, 0],
@@ -82,3 +114,4 @@ matrix = [
 print maxSquareSubmatrix(matrix)
 print maxRectangleSubmatrix(matrix)
 print maxRectangleSubmatrix_2(matrix)
+print maxArea(matrix)
