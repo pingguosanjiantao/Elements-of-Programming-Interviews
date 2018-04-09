@@ -10,11 +10,11 @@ def getLargestRectangle(nums):
         # maximum the rectangle
         while len(stack) > 0 and (i == len(nums) or nums[i] < nums[stack[-1]]):
             height = nums[stack.pop()]
-            head = 0 if len(stack) == 0 else stack[-1]
+            head = -1 if len(stack) == 0 else stack[-1]
             width = i - 1 - head
             ret = max(ret, height * width)
         stack += [i]
     return ret
 
 
-print getLargestRectangle([1, 4, 2, 5, 6])
+print getLargestRectangle([1, 3, 3, 1, 3])

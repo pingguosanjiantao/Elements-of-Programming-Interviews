@@ -9,14 +9,14 @@ def maxSquareSubmatrix(matrix):
                 maxH = maxHW[i - 1][j][0] + 1 if i - 1 >= 0 else 1
                 maxW = maxHW[i][j - 1][1] + 1 if j - 1 >= 0 else 1
                 maxHW[i][j] = [maxH, maxW]
-    maxSide = [[[0, 0] for _ in range(cols)] for _ in range(rows)]
+    maxSide = [[0 for _ in range(cols)] for _ in range(rows)]
     maxSquareArea = 0
     for i in range(rows):
         for j in range(cols):
             side = min(maxHW[i][j])
             if matrix[i][j] == 1:
-                if i + 1 < rows and j + 1 < cols:
-                    side = min(maxSide[i + 1][j + 1], side)
+                if i - 1 >= 0 and j - 1 >= 0:
+                    side = min(maxSide[i - 1][j - 1] + 1, side)
                 maxSide[i][j] = side
                 maxSquareArea = max(maxSquareArea, side * side)
     return maxSquareArea
@@ -55,7 +55,7 @@ def getLargestRectangle(nums):
         # maximum the rectangle
         while len(stack) > 0 and (i == len(nums) or nums[i] < nums[stack[-1]]):
             height = nums[stack.pop()]
-            head = 0 if len(stack) == 0 else stack[-1]
+            head = -1 if len(stack) == 0 else stack[-1]
             width = i - 1 - head
             ret = max(ret, height * width)
         stack += [i]
@@ -69,7 +69,7 @@ def maxRectangleSubmatrix_2(matrix):
     for i in range(rows):
         for j in range(cols):
             matrixLine[j] = matrixLine[j] + 1 if matrix[i][j] == 1 else 0
-            maxRectangleArea = max(maxRectangleArea, getLargestRectangle(matrixLine))
+        maxRectangleArea = max(maxRectangleArea, getLargestRectangle(matrixLine[:]))
     return maxRectangleArea
 
 # 寻找最大面积, 不规则
@@ -94,22 +94,22 @@ def maxArea(matrix):
             if matrix[i][j] == 1:
                 # union upper
                 if i - 1 >= 0 and matrix[i - 1][j] == 1:
-                    uf.union(i * rows + j, (i - 1) * rows + j)
+                    uf.union(i * cols + j, (i - 1) * cols + j)
                 # union left
                 if j - 1 >= 0 and matrix[i][j - 1] == 1:
-                    uf.union(i * rows + j, i * rows + (j - 1))
+                    uf.union(i * cols + j, i * cols + (j - 1))
     counter = {}
     for i in range(rows):
         for j in range(cols):
-            root = uf.find(i * rows + j)
-            counter[root] = counter.get(root, 0) + 1
+            if matrix[i][j] == 1:
+                root = uf.find(i * cols + j)
+                counter[root] = counter.get(root, 0) + 1
     return max(counter.values())
 
 matrix = [
-    [0, 1, 1, 0],
-    [0, 1, 1, 0],
-    [0, 1, 1, 1],
-    [0, 1, 1, 1]
+    [1, 1, 0, 1],
+    [1, 1, 0, 1],
+    [1, 1, 1, 1]
 ]
 print maxSquareSubmatrix(matrix)
 print maxRectangleSubmatrix(matrix)
