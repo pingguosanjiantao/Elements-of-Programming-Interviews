@@ -1,14 +1,3 @@
-# brute-force
-def reverseBits(x):
-    for i in range(4):
-        mask = (1 << i)
-        if x & mask == 0:
-            x |= mask
-        else:
-            x &= ~mask
-    return x
-
-
 # using a cache
 def reverseBits_cache(x):
     precomputedReverse = [0b0000,0b1000,0b0100,0b1100,
@@ -19,7 +8,8 @@ def reverseBits_cache(x):
     bitMask = 0xF
     ret = 0
     for i in range(32 / wordSize):
-        ret |= precomputedReverse[((x >> i * wordSize) & bitMask)] << ((32 / wordSize - 1 - i) * wordSize)
+        ret <<= wordSize
+        ret |= precomputedReverse[((x >> i * wordSize) & bitMask)]
     return ret
 
-print bin(reverseBits_cache(0b1000))
+print bin(reverseBits_cache(0b10010))
