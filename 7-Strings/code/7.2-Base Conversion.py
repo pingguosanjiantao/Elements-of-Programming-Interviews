@@ -22,10 +22,10 @@ def constructFromBase(num, base):
     while num > 0:
         digit = num % base
         num /= base
-        ret = ret + str(digit)
+        ret = str(digit) + ret
     return '0' if len(ret) == 0 else ret
 
 
-print constructFromBase(0, 6)
+print constructFromBase(6, 6)
 
 print convertBase('-28', 6)
