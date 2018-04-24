@@ -5,19 +5,18 @@ def rabinKarp(s, t):
     sHash, tHash = 0, 0
     BASE, powerT = 26, 1
     for i in range(len(t)):
-        powerT = powerT * BASE if i > 0 else 1
-        sHash, tHash = sHash * BASE + ord(s[i]), tHash * BASE + ord(t[i])
-    k = len(t)
-    while k <= len(s):
+        if i > 0:
+            powerT = powerT * BASE
+        sHash = sHash * BASE + ord(s[i])
+        tHash = tHash * BASE + ord(t[i])
+    for k in range(len(t), len(s) + 1):
         idx = k - len(t)
         if tHash == sHash and s[idx:k] == t:
             return idx
-        # break condition
         if k == len(s):
             break
         sHash -= ord(s[idx]) * powerT
         sHash = sHash * BASE + ord(s[k])
-        k += 1
     return -1
 
 
