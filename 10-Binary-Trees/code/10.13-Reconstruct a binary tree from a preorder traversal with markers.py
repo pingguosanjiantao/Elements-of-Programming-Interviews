@@ -6,13 +6,10 @@ class TreeNode:
 
 # optimal solution
 def reconstructPreorder(preorder):
-    idx, length = 0, len(preorder)
     def doReconstructPreorder():
-        global idx
-        if idx == length:
+        if preorder[0] == 'null':
             return None
-        root = TreeNode(preorder[idx])
-        idx += 1
+        root = TreeNode(preorder.pop())
         left = doReconstructPreorder()
         right = doReconstructPreorder()
         root.left, root.right = left, right
