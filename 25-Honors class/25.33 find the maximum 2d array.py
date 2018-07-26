@@ -21,6 +21,19 @@ def maxSquareSubmatrix(matrix):
                 maxSquareArea = max(maxSquareArea, side * side)
     return maxSquareArea
 
+def maxSquareSubmatrix_2(matrix):
+    if matrix == []:
+        return 0
+    rows, cols = len(matrix), len(matrix[0])
+    dp = [[0] * cols for _ in range(rows)]
+    ans = 0  # 最长边
+    for i in range(rows):
+        for j in range(cols):
+            dp[i][j] = int(matrix[i][j])
+            if i > 0 and j > 0 and dp[i][j] > 0:
+                dp[i][j] = min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1
+            ans = max(ans, dp[i][j])
+    return ans * ans
 
 # 2.寻找最大长方形
 def maxRectangleSubmatrix(matrix):
@@ -112,6 +125,7 @@ matrix = [
     [1, 1, 1, 1]
 ]
 print maxSquareSubmatrix(matrix)
+print maxSquareSubmatrix_2(matrix)
 print maxRectangleSubmatrix(matrix)
 print maxRectangleSubmatrix_2(matrix)
 print maxArea(matrix)
