@@ -10,14 +10,13 @@ class TreeNode:
 def constructRightSibling(root):
     if root is None:
         return
-    dummy = TreeNode(-1)
-    pre, cur = dummy, root
-    while cur is not None:
-        if cur.left is not None:
-            pre.next = cur.left
+    pre = dummy = TreeNode(-1)
+    while root:
+        if root.left:
+            pre.next = root.left
             pre = pre.next
-        if cur.right is not None:
-            pre.next = cur.right
+        if root.right:
+            pre.next = root.right
             pre = pre.next
-        cur = cur.next
+        root = root.next
     constructRightSibling(dummy.next)
