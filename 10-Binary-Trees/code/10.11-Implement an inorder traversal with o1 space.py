@@ -12,16 +12,16 @@ def inorderTraversal(root):
     pre, cur = None, root
     result = []
     while cur is not None:
-        if cur.parent is pre:
+        if cur.parent is pre:  # from father
             if cur.left is not None:
                 next = cur.left
             else:
                 result += [cur.val]
-                next = cur.right if cur.right is not None else cur.parent
-        elif cur.left is pre:
+                next = cur.right if cur.right else cur.parent
+        elif cur.left is pre:  # from left children
             result += [cur.val]
-            next = cur.right if cur.right is not None else cur.parent
-        else:
+            next = cur.right if cur.right else cur.parent
+        else:  # from right
             next = cur.parent
 
         pre = cur
