@@ -1,15 +1,16 @@
 def searchFisrt(nums, key):
     left, right = 0, len(nums)
-    ret = None
     while left < right:
         mid = left + (right - left) / 2
         if nums[mid] == key:
-            ret = mid
             right -= 1
-        elif nums[mid] > key:
-            right = mid
-        else:
+        elif nums[mid] < key:
             left = mid + 1
-    return ret
+        else:
+            right = mid
+    return left
 
-print searchFisrt([-14, -10, 2, 108, 108, 243, 285, 285, 401], 285)
+
+nums = [-14, -14, -14, -14, -14, 4]
+for n in nums:
+    print searchFisrt(nums, n)
