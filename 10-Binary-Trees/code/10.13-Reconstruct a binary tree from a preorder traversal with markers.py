@@ -8,6 +8,7 @@ class TreeNode:
 def reconstructPreorder(preorder):
     def doReconstructPreorder():
         if preorder[0] == 'null':
+            preorder.pop(0)
             return None
         root = TreeNode(preorder.pop())
         left = doReconstructPreorder()
