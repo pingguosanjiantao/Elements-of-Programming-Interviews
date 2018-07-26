@@ -5,7 +5,7 @@ class TreeNode:
         self.right = None
 
 
-# a very amaznig problem
+# a very amaznig problem, this is not a optimal solution
 # leftTraversal is preorder, and rightTraversal is postorder
 # rootTraversal is inorder
 def exteriorBinaryTree(root):
