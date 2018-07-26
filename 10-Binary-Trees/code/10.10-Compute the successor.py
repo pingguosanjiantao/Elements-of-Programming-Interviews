@@ -4,6 +4,6 @@ def findSuccessor(root):
         while root.left is not None:
             root = root.left
         return root
-    while root.parent is not None and root.parent.right == root:
+    while root.parent and root.parent.right == root:
         root = root.parent
     return root.parent
