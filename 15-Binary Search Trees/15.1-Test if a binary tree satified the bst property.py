@@ -22,4 +22,4 @@ def isBSTIteration(root):
             queue += [[cur.left, lower, cur.val]]
         if cur.right is not None:
             queue += [[cur.right, root.val, upper]]
-    return Ture
+    return True
