@@ -1,26 +1,21 @@
 def isPalindrome(s):
-    left, right = 0, len(s) - 1
-    while left < right:
-        if s[left] != s[right]:
-            return False
-        left, right = left + 1, right - 1
-    return True
+    return s == s[::-1]
 
 
 def palindromePartition(s):
-    def doPartition(s, begin, cur, ret):
+    def doPartition(s, begin, cur):
         if begin == len(s):
-            ret += [cur[:]]
+            ret.append(cur[:])
             return
         for i in range(begin + 1, len(s) + 1):
             prefix = s[begin:i]
             if isPalindrome(prefix):
                 cur += [prefix]
-                doPartition(s, i, cur, ret)
+                doPartition(s, i, cur)
                 cur.pop()
 
     ret = []
-    doPartition(s, 0, [], ret)
+    doPartition(s, 0, [])
     return ret
 
 
