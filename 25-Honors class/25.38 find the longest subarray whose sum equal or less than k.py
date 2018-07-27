@@ -1,25 +1,25 @@
 # coding:utf-8
 def findLongestSubarrayLessEqualK(nums, k):
-    prefixSum = []
-    sums = 0
-    for ele in nums:
-        sums += ele
-        prefixSum += [sums]
-    if prefixSum[-1] <= k:
-        return len(nums)
-    minPrefixSum = prefixSum[:]
-    for i in range(len(minPrefixSum) - 2, -1, -1):
-        minPrefixSum[i] = min(minPrefixSum[i], minPrefixSum[i + 1])
-    a, b = 0, 0
-    maxLength = 0
-    while a < len(nums) and b < len(nums):
-        minCurrSum = minPrefixSum[b] - prefixSum[a - 1] if a > 0 else minPrefixSum[b]
-        if minCurrSum <= k:
-            curLength = b - a + 1
-            maxLength = max(curLength, maxLength)
-            b += 1
-        else:
-            a += 1
-    return maxLength
+    sums = [0] * len(nums)
+    for i in range(len(nums)):
+        sums[i] = sums[i - 1] + nums[i]
 
-print findLongestSubarrayLessEqualK([431, -15, 639, 342, -14, 565, -924, 635, 167, -70], 184)
+    minSumRight = sums[:]  # the minum from right to left
+    for i in range(len(minSumRight) - 1)[::-1]:
+        minSumRight[i] = min(minSumRight[i], minSumRight[i + 1])
+
+    i, j = 0, 0
+    ans = 0
+    while i < len(nums) and j < len(nums):
+        minCurrSum = minSumRight[j] - sums[i - 1] if i > 0 else minSumRight[j]
+        if minCurrSum <= k:
+            ans = max(ans, j - i + 1)
+            j += 1
+        else:  # maybe has a shorter result
+            i += 1
+    return ans
+
+
+nums = [1, 3, 4, -1, 5, 2, 7, -5]
+k = 16
+print findLongestSubarrayLessEqualK(nums, k)
