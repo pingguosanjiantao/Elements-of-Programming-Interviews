@@ -9,13 +9,13 @@ class TreeNode:
 # on condition that node has the field of parent
 def LCA(a, b):
     map = []
-    while a is not None or b is not None:
-        if a is not None:
+    while a or b:
+        if a:
             if a in map:
                 return a
             map += [a]
             a = a.parent
-        if b is not None:
+        if b:
             if b in map:
                 return b
             map += [b]
