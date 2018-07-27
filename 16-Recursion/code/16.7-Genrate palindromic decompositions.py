@@ -3,19 +3,20 @@ def isPalindrome(s):
 
 
 def palindromePartition(s):
-    def doPartition(s, begin, cur):
+    def doPartition(s, begin):
         if begin == len(s):
-            ret.append(cur[:])
+            ret.append(path[:])
             return
         for i in range(begin + 1, len(s) + 1):
             prefix = s[begin:i]
             if isPalindrome(prefix):
-                cur += [prefix]
-                doPartition(s, i, cur)
-                cur.pop()
+                path.append(prefix)
+                doPartition(s, i)
+                path.pop()
 
+    path = []
     ret = []
-    doPartition(s, 0, [])
+    doPartition(s, 0)
     return ret
 
 
