@@ -5,18 +5,19 @@ def findDuplicateMissing(nums):
     for i in range(length):
         missXORDup ^= (i ^ nums[i])
     diffBit = missXORDup & (~(missXORDup - 1))
-    miss, dup = 0, 0
+    a, b = 0, 0
     for i in range(length):
         if (i & diffBit) != 0:
-            miss ^= i
+            a ^= i
         else:
-            dup ^= i
+            b ^= i
         if (nums[i] & diffBit) != 0:
-            miss ^= nums[i]
+            a ^= nums[i]
         else:
-            dup ^= nums[i]
-
-    return [miss, dup]
+            b ^= nums[i]
+    if a in nums:
+        return [b, a]
+    return [a, b]
 
 
 print findDuplicateMissing([5, 3, 0, 3, 1, 2])
