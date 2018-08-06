@@ -1,7 +1,7 @@
 def findFirstGreater(root, k):
     ret = None
-    while root is not None:
-        if root.val > k:
+    while root:
+        if k < root.val:
             ret = root.val
             root = root.left
         else:

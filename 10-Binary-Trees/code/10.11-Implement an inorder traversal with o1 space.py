@@ -11,9 +11,9 @@ class TreeNode:
 def inorderTraversal(root):
     pre, cur = None, root
     result = []
-    while cur is not None:
+    while cur:
         if cur.parent is pre:  # from father
-            if cur.left is not None:
+            if cur.left:
                 next = cur.left
             else:
                 result += [cur.val]
