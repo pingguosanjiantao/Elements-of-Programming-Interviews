@@ -1,25 +1,27 @@
 # coding:utf-8
 def findLongestSubarrayLessEqualK(nums, k):
-    sums = [0] * len(nums)
-    for i in range(len(nums)):
+    length = len(nums)
+
+    sums = [0] * length
+    for i in range(length):
         sums[i] = sums[i - 1] + nums[i]
 
     minSumRight = sums[:]  # the minum from right to left
-    for i in range(len(minSumRight) - 1)[::-1]:
+    for i in range(length - 1)[::-1]:
         minSumRight[i] = min(minSumRight[i], minSumRight[i + 1])
 
-    i, j = 0, 0
+    sums += [0]
+
+    i, j = -1, 0
     ans = 0
-    while i < len(nums) and j < len(nums):
-        minCurrSum = minSumRight[j] - sums[i - 1] if i > 0 else minSumRight[j]
-        if minCurrSum <= k:
-            ans = max(ans, j - i + 1)
+    while i < length and j < length:
+        while j < len(nums) and minSumRight[j] - sums[i] <= k:
+            ans = max(ans, j - i)
             j += 1
-        else:  # maybe has a shorter result
-            i += 1
+        i += 1
     return ans
 
 
 nums = [1, 3, 4, -1, 5, 2, 7, -5]
-k = 16
+k = 8
 print findLongestSubarrayLessEqualK(nums, k)
